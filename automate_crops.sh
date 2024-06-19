@@ -9,7 +9,7 @@ if [ ! -d "$crops_out_loc" ]; then
 fi
 
 . "${crops_loc}/env/bin/activate"
-python "${crops_loc}/src/main.py" -i "${transmission_loc}/torrents" -o "$crops_out_loc"
+python "${crops_loc}/src/main.py" --lookup -i "${transmission_loc}/torrents" -o "$crops_out_loc"
 deactivate 
 
 . "${tr_add_loc}/env/bin/activate"
