@@ -1,6 +1,6 @@
 #!/bin/bash 
 crops_loc="/opt/crops"
-tr_add_loc="/opttransmission-add-crops"
+tr_add_loc="/opt/transmission-add-crops"
 transmission_loc="/var/ddata/autoget/transmission-user"
 crops_out_loc="${transmission_loc}/crops-out"
 
