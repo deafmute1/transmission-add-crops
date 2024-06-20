@@ -3,7 +3,7 @@ from transmission_rpc import Client
 from dotenv import load_dotenv
 import bencoder
 
-import os,sys,json,time
+import os,sys,json,time,argparse
 from pathlib import Path
 from hashlib import sha1
 
@@ -26,7 +26,7 @@ if __name__ == "__main__":
             "   instead of leaving them paused"
         )
         exit(0)
-    elif sys.argv[1].casefold() == "--remove".casefold() :
+    elif sys.argv[1].casefold() == "--remove".casefold():
         remove=True
         path=Path(sys.argv[2]).resolve()
     else: 
@@ -50,7 +50,11 @@ if __name__ == "__main__":
         tf_hash = sha1(
             bencoder.encode(decoded[b"info"])
         ).hexdigest().upper()
-        existing_hash = hashes[tf_hash]
+        try: 
+            existing_hash = hashes[tf_hash]
+        except KeyError:
+            print(f"Skipping {torrent_file.name} as no matching hash found in hash-lookup.json")
+            continue
         
         # We are relying on being given good hash mappings to match torrents;
         # don't bother comparing torrent file to existing torrent on deeper level 
